@@ -1,32 +1,25 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [favorites, setFavorites] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="food-header">
+        <h1>My Delicious Food App</h1>
       </div>
-      <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <p>Welcome to your personalized food experience!</p>
+        <button onClick={() => setFavorites((favorites) => favorites + 1)}>
+          Favorite dishes: {favorites}
         </button>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Browse recipes, track nutrition, and plan your meals all in one place.
         </p>
       </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        Start exploring our collection of amazing recipes
       </p>
     </>
   )
