@@ -93,6 +93,57 @@
         "zipCode": "12345"
       },
       "status": "delivered"
+    },
+    {
+      "userId": 2,
+      "orderDate": "2025-04-09T20:46:12.940Z",
+      "items": [
+        {
+          "productId": 3,
+          "name": "Chicken Curry",
+          "price": 14.99,
+          "quantity": 1
+        },
+        {
+          "productId": 2,
+          "name": "Veggie Burger",
+          "price": 9.99,
+          "quantity": 1
+        },
+        {
+          "productId": 1,
+          "name": "Margherita Pizza",
+          "price": 12.99,
+          "quantity": 1
+        },
+        {
+          "productId": 4,
+          "name": "Caesar Salad",
+          "price": 8.99,
+          "quantity": 1
+        },
+        {
+          "productId": 5,
+          "name": "Sushi Platter",
+          "price": 18.99,
+          "quantity": 1
+        },
+        {
+          "productId": 6,
+          "name": "Chocolate Cake",
+          "price": 6.99,
+          "quantity": 1
+        }
+      ],
+      "total": 72.94,
+      "shippingAddress": {
+        "name": "adwa",
+        "address": "123",
+        "city": "123",
+        "zipCode": "12"
+      },
+      "status": "pending",
+      "id": 2
     }
   ]
 }
