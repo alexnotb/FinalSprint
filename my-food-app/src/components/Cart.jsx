@@ -1,7 +1,7 @@
 import { useCart } from '../context/CartContext';
 import './Cart.css';
 
-function Cart() {
+function Cart({ onCheckoutClick, onContinueShopping }) {
   // Get cart data and functions from context
   const { 
     cartItems, 
@@ -41,7 +41,7 @@ function Cart() {
         <p>Your cart is empty</p>
         <button 
           className="continue-shopping"
-          onClick={() => window.location.hash = '#'}
+          onClick={onContinueShopping}
         >
           Continue Shopping
         </button>
@@ -116,13 +116,13 @@ function Cart() {
         <div className="cart-actions">
           <button 
             className="continue-shopping"
-            onClick={() => window.location.hash = '#'}
+            onClick={onContinueShopping}
           >
             Continue Shopping
           </button>
           <button 
             className="proceed-to-checkout"
-            onClick={() => window.location.hash = '#checkout'}
+            onClick={onCheckoutClick}
           >
             Proceed to Checkout
           </button>

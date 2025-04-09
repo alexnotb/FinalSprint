@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import './Checkout.css';
 
-function Checkout() {
+function Checkout({ onBackToCartClick, onContinueShopping, onOrderComplete }) {
   const { cartItems, getTotal, clearCart, isLoading } = useCart();
   
   // Form state
@@ -55,15 +55,13 @@ function Checkout() {
       setTimeout(() => {
         clearCart();
         setOrderSuccess(true);
+        if (onOrderComplete) {
+          onOrderComplete();
+        }
       }, 1000);
     } catch (error) {
       console.error('Error processing order:', error);
     }
-  };
-  
-  // Handle going back to home page
-  const goToHome = () => {
-    window.location.hash = '#';
   };
   
   // Redirect to products if cart is empty
@@ -74,7 +72,7 @@ function Checkout() {
         <p>Your cart is empty</p>
         <button 
           className="continue-shopping"
-          onClick={goToHome}
+          onClick={onContinueShopping}
         >
           Shop Now
         </button>
@@ -91,7 +89,7 @@ function Checkout() {
         <p>Your order has been received and is being processed.</p>
         <button 
           className="back-to-shopping"
-          onClick={goToHome}
+          onClick={onContinueShopping}
         >
           Continue Shopping
         </button>
@@ -275,7 +273,7 @@ function Checkout() {
               <button 
                 type="button" 
                 className="back-to-cart"
-                onClick={() => window.location.hash = '#cart'}
+                onClick={onBackToCartClick}
               >
                 Back to Cart
               </button>

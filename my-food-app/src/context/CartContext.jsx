@@ -198,6 +198,11 @@ export const CartProvider = ({ children }) => {
     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
+  // Calculate total number of items in cart
+  const getItemCount = () => {
+    return cartItems.reduce((count, item) => count + item.quantity, 0);
+  };
+
   // Clear cart
   const clearCart = async () => {
     setIsLoading(true);
@@ -232,6 +237,7 @@ export const CartProvider = ({ children }) => {
     removeFromCart,
     updateQuantity,
     getTotal,
+    getItemCount,
     clearCart
   };
 

@@ -23,7 +23,7 @@ const fallbackProducts = [
   // Add a couple more items from your db.json as fallback
 ];
 
-function ProductList() {
+function ProductList({ onProductClick }) {
   // State for products data
   const [products, setProducts] = useState([]);
   // State for loading status
@@ -65,6 +65,16 @@ function ProductList() {
   const handleAddToCart = (product, event) => {
     if (event) event.preventDefault();  // Prevent navigation
     addToCart(product, 1);
+  };
+
+  // Handle view product details
+  const handleViewProduct = (productId, event) => {
+    if (event) event.preventDefault();
+    if (onProductClick) {
+      onProductClick(productId);
+    } else {
+      console.warn('No onProductClick handler provided');
+    }
   };
 
   // Show loading state
@@ -123,7 +133,8 @@ function ProductList() {
             <div className="product-actions">
               <button 
                 className="view-button"
-                onClick={() => window.location.href = `#product-${product.id}`}
+                onClick={(e) => handleViewProduct(product.id, e)}
+                aria-label={`View details of ${product.name}`}
               >
                 View Details
               </button>
