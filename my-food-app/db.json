@@ -49,5 +49,50 @@
       "category": "Dessert"
     }
   ],
-  "cart": []
+  "cart": [],
+  "users": [
+    {
+      "id": 1,
+      "email": "demo@example.com",
+      "password": "password123",
+      "name": "Demo User",
+      "address": "123 Main St",
+      "city": "Anytown",
+      "zipCode": "12345",
+      "phone": "555-123-4567"
+    },
+    {
+      "name": "adwa",
+      "email": "izi@gmail.com",
+      "password": "123123",
+      "address": "123",
+      "city": "123",
+      "zipCode": "12",
+      "phone": "123",
+      "id": 2
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "userId": 1,
+      "orderDate": "2023-04-15T10:30:00.000Z",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Margherita Pizza",
+          "price": 12.99,
+          "quantity": 2
+        }
+      ],
+      "total": 25.98,
+      "shippingAddress": {
+        "name": "Demo User",
+        "address": "123 Main St",
+        "city": "Anytown",
+        "zipCode": "12345"
+      },
+      "status": "delivered"
+    }
+  ]
 }

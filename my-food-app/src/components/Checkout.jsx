@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import './Checkout.css';
 
 function Checkout({ onBackToCartClick, onContinueShopping, onOrderComplete }) {
   const { cartItems, getTotal, clearCart, isLoading } = useCart();
+  const { currentUser } = useAuth();
   
-  // Form state
+  // Form state with pre-filled user data if available
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,6 +19,21 @@ function Checkout({ onBackToCartClick, onContinueShopping, onOrderComplete }) {
     expDate: '',
     cvv: ''
   });
+  
+  // Update form with user data when available
+  useEffect(() => {
+    if (currentUser) {
+      setFormData(prevState => ({
+        ...prevState,
+        name: currentUser.name || '',
+        email: currentUser.email || '',
+        address: currentUser.address || '',
+        city: currentUser.city || '',
+        zipCode: currentUser.zipCode || '',
+        cardName: currentUser.name || ''
+      }));
+    }
+  }, [currentUser]);
   
   // Order success state
   const [orderSuccess, setOrderSuccess] = useState(false);
@@ -51,6 +68,37 @@ function Checkout({ onBackToCartClick, onContinueShopping, onOrderComplete }) {
     }
     
     try {
+      // If user is logged in, save order to their history
+      if (currentUser) {
+        const orderData = {
+          userId: currentUser.id,
+          orderDate: new Date().toISOString(),
+          items: cartItems.map(item => ({
+            productId: item.productId,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity
+          })),
+          total: getTotal(),
+          shippingAddress: {
+            name: formData.name,
+            address: formData.address,
+            city: formData.city,
+            zipCode: formData.zipCode
+          },
+          status: 'pending'
+        };
+        
+        // Send order to server
+        await fetch('http://localhost:3001/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(orderData)
+        });
+      }
+      
       // Simulate order processing
       setTimeout(() => {
         clearCart();

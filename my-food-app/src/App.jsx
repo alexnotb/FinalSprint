@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CartProvider, useCart } from './context/CartContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
 
 // Import components directly
@@ -7,6 +8,8 @@ import ProductListContent from './components/ProductList';
 import ProductDetailsContent from './components/ProductDetails';
 import CartContent from './components/Cart';
 import CheckoutContent from './components/Checkout';
+import Auth from './components/Auth';
+import Account from './components/Account';
 
 // Create wrapper components that don't rely on react-router-dom
 const ProductList = ({ onProductClick }) => <ProductListContent onProductClick={onProductClick} />;
@@ -30,11 +33,12 @@ const ProductDetails = ({ productId, onBackClick }) => {
   );
 };
 
-// App content component (inside CartProvider)
+// App content component (inside providers)
 function AppContent() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProductId, setSelectedProductId] = useState(null);
   const { getItemCount } = useCart();
+  const { currentUser, logout } = useAuth();
 
   // Handle navigation
   const navigate = (page, productId = null) => {
@@ -62,13 +66,24 @@ function AppContent() {
                  onContinueShopping={() => navigate('home')}
                />;
       case 'checkout':
-        return <Checkout 
-                 onBackToCartClick={() => navigate('cart')}
-                 onContinueShopping={() => navigate('home')}
-                 onOrderComplete={() => {
-                   setTimeout(() => navigate('home'), 3000);
-                 }}
-               />;
+        // Redirect to login if not authenticated
+        return !currentUser 
+          ? <Auth onAuthSuccess={() => navigate('checkout')} /> 
+          : <Checkout 
+              onBackToCartClick={() => navigate('cart')}
+              onContinueShopping={() => navigate('home')}
+              onOrderComplete={() => {
+                setTimeout(() => navigate('home'), 3000);
+              }}
+            />;
+      case 'login':
+        return currentUser
+          ? navigate('account')
+          : <Auth onAuthSuccess={() => navigate('account')} />;
+      case 'account':
+        return currentUser
+          ? <Account />
+          : <Auth onAuthSuccess={() => navigate('account')} />;
       default:
         return <ProductList />;
     }
@@ -114,6 +129,12 @@ function AppContent() {
                 <span className="cart-count">{getItemCount()}</span>
               )}
             </span>
+            <span 
+              onClick={() => navigate(currentUser ? 'account' : 'login')}
+              style={{ cursor: 'pointer' }}
+            >
+              {currentUser ? 'My Account' : 'Login'}
+            </span>
           </nav>
         </div>
       </header>
@@ -126,7 +147,7 @@ function AppContent() {
       {/* Footer */}
       <footer className="app-footer">
         <div className="footer-content">
-          <p>&copy; 2029 Food Shop. All rights reserved.</p>
+          <p>&copy; 2024 Food Shop. All rights reserved.</p>
         </div>
       </footer>
     </div>
@@ -136,9 +157,11 @@ function AppContent() {
 // Main App component
 function App() {
   return (
-    <CartProvider>
-      <AppContent />
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
+    </AuthProvider>
   );
 }
 
