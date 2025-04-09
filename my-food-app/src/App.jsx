@@ -126,7 +126,7 @@ function AppContent() {
       {/* Footer */}
       <footer className="app-footer">
         <div className="footer-content">
-          <p>&copy; 2023 Food Shop. All rights reserved.</p>
+          <p>&copy; 2029 Food Shop. All rights reserved.</p>
         </div>
       </footer>
     </div>
