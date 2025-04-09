@@ -1,0 +1,70 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Margherita Pizza",
+      "price": 12.99,
+      "description": "Classic pizza with tomato sauce, mozzarella cheese, and fresh basil.",
+      "image": "https://images.unsplash.com/photo-1598023696416-0193a0bcd302?q=80&w=300",
+      "category": "Italian"
+    },
+    {
+      "id": 2,
+      "name": "Veggie Burger",
+      "price": 9.99,
+      "description": "Plant-based burger patty with lettuce, tomato, onion, and special sauce.",
+      "image": "https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=300",
+      "category": "American"
+    },
+    {
+      "id": 3,
+      "name": "Chicken Curry",
+      "price": 14.99,
+      "description": "Tender chicken in a rich curry sauce with vegetables and basmati rice.",
+      "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=300",
+      "category": "Indian"
+    },
+    {
+      "id": 4,
+      "name": "Caesar Salad",
+      "price": 8.99,
+      "description": "Fresh romaine lettuce with Caesar dressing, croutons, and parmesan cheese.",
+      "image": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?q=80&w=300",
+      "category": "Salads"
+    },
+    {
+      "id": 5,
+      "name": "Sushi Platter",
+      "price": 18.99,
+      "description": "Assortment of fresh sushi rolls with soy sauce, wasabi, and ginger.",
+      "image": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=300",
+      "category": "Japanese"
+    },
+    {
+      "id": 6,
+      "name": "Chocolate Cake",
+      "price": 6.99,
+      "description": "Decadent chocolate cake with rich frosting and chocolate shavings.",
+      "image": "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?q=80&w=300",
+      "category": "Dessert"
+    }
+  ],
+  "cart": [
+    {
+      "productId": 4,
+      "name": "Caesar Salad",
+      "price": 8.99,
+      "image": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?q=80&w=300",
+      "quantity": 1,
+      "id": 1
+    },
+    {
+      "productId": 3,
+      "name": "Chicken Curry",
+      "price": 14.99,
+      "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=300",
+      "quantity": 1,
+      "id": 2
+    }
+  ]
+}
